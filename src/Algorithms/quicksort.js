@@ -20,9 +20,9 @@ const swap = (array, i, j) => {
 }
 
 const partition = (animations, array, st, dr) => {
-    var pivot   = array[Math.floor((st + dr)/2)],
-        i       = st, 
-        j       = dr; 
+    var pivot = array[Math.floor((st + dr)/2)],
+        i = st, 
+        j = dr; 
     while (i <= j) {
         animations.push({compare: [i, j]});
         while (array[i] < pivot) {
