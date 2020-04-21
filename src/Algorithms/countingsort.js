@@ -1,7 +1,7 @@
 export const countingSort = (arr) => {
     const count = {};
     let Max = 0, Min = 20000;
-    arr.map((value) => {
+    arr.forEach((value) => {
         if(value > Max)
             Max = value;
         if(value < Min)
