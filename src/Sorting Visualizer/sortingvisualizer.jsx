@@ -53,45 +53,44 @@ export class SortingVisualizer extends React.Component{
     }
 
     async qSort(){
-        let animations = [], arrayElements = document.getElementsByClassName('numbers');;
+        let animations = [], arrayElements = document.getElementsByClassName('numbers'); //choose the divs that represent the numbers of this.state.array, and declare an empty animations array
         let array1 = this.state.array;
         
-        array1 = quicksort(animations, array1, 0, array1.length-1);
-        animations.push({pivot: 0});
-        console.log(animations);
+        array1 = quicksort(animations, array1, 0, array1.length-1); //quicksort found in ../Algorithms/quicksort.js
+        animations.push({pivot: 0})//to stop encountering an issue where i > animations.length in the while at line 69
+        
         for(let i = 0; i < animations.length; i++){
-            if(animations[i].pivot !== undefined){
-                let pivot = animations[i].pivot;
-                arrayElements[animations[i].pivot].style.backgroundColor = 'red';
+            if(animations[i].pivot !== undefined){ //if we have a pivot
+                let pivot = animations[i].pivot; //save the position for later use
+                arrayElements[animations[i].pivot].style.backgroundColor = 'red'; //make it red
                 i++;
                 
                 if(i < animations.length){
-                    while(animations[i].pivot === undefined){
-                        if(animations[i].compare !== undefined){
+                    while(animations[i].pivot === undefined){ //until the next pivot execute the instructions for that partition
+                        if(animations[i].compare !== undefined){ //if we have 2 pointers to compare, turn em red for 15ms
                             arrayElements[animations[i].compare[0]].style.backgroundColor = 'red';
                             arrayElements[animations[i].compare[1]].style.backgroundColor = 'red';
     
-                            await new Promise(r => setTimeout(r, 10));
-                            
-                            arrayElements[animations[i].compare[0]].style.backgroundColor = 'aquamarine';
+                            await new Promise(r => setTimeout(r, 15));
+                            arrayElements[animations[i].compare[0]].style.backgroundColor = 'aquamarine';//and make em aquamarine
                             arrayElements[animations[i].compare[1]].style.backgroundColor = 'aquamarine';
                         }
-                        else if(animations[i].swap !== undefined){
+                        if(animations[i].swap !== undefined){//if we need to swap 2 values, make the divs red for 15ms and swap them
                             arrayElements[animations[i].swap[0]].style.backgroundColor = 'red';
                             arrayElements[animations[i].swap[1]].style.backgroundColor = 'red';
     
-                            let temp = arrayElements[animations[i].swap[0]].style.height;
+                            let temp = arrayElements[animations[i].swap[0]].style.height; //generic swap with temp, should work
                             arrayElements[animations[i].swap[0]].style.height = arrayElements[animations[i].swap[1]].style.height;
                             arrayElements[animations[i].swap[1]].style.height = temp;
     
-                            await new Promise(r => setTimeout(r, 10));
+                            await new Promise(r => setTimeout(r, 15));
                             arrayElements[animations[i].swap[0]].style.backgroundColor = 'aquamarine';
                             arrayElements[animations[i].swap[1]].style.backgroundColor = 'aquamarine';
                         }
                         i++;
                     }
                 }
-                arrayElements[pivot].style.backgroundColor = 'aquamarine';
+                arrayElements[pivot].style.backgroundColor = 'aquamarine'; //make the pivot aquamarine, get ready for next parititon
             }
         }
     }
