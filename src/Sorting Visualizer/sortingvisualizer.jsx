@@ -4,6 +4,7 @@ import {Buttons} from './buttons';
 import {countingSort} from '../Algorithms/countingsort';
 import {quicksort} from '../Algorithms/quicksort';
 import {bubblesort} from '../Algorithms/bubblesort';
+import {mergeSort} from '../Algorithms/mergesort';
 import {test} from '../Algorithms/testAlgo';
 
 export class SortingVisualizer extends React.Component{
@@ -15,6 +16,7 @@ export class SortingVisualizer extends React.Component{
         this.cSort = this.cSort.bind(this);
         this.qSort = this.qSort.bind(this);
         this.bSort = this.bSort.bind(this);
+        this.mSort = this.mSort.bind(this);
     }
 
     shuffle(){
@@ -109,6 +111,39 @@ export class SortingVisualizer extends React.Component{
         this.setState({array: sortedArray});
     }
 
+    async mSort(){
+        let animations = [], sortedArray = this.state.array;
+        let arrayElements = document.getElementsByClassName('numbers');
+        mergeSort(animations, sortedArray, 0, sortedArray.length-1);
+        console.log(animations);
+
+        for(let i = 0; i < animations.length; i++){
+            if(animations[i].compare !== undefined){
+                arrayElements[animations[i].compare[0]].style.backgroundColor = 'red';
+                if(animations[i].compare[1] !== undefined){
+                    arrayElements[animations[i].compare[1]].style.backgroundColor = 'red';
+                }
+
+                await new Promise(r => setTimeout(r, 15));
+                arrayElements[animations[i].compare[0]].style.backgroundColor = 'aquamarine';
+                if(animations[i].compare[1] !== undefined){
+                    arrayElements[animations[i].compare[1]].style.backgroundColor = 'aquamarine';
+                }
+            }
+            if(animations[i].merge !== undefined){
+                const dr = animations[i].merge[0] + animations[i].merge[1].length, st = animations[i].merge[0];
+                let k = 0;
+                for(let j = st; j < dr; j++){
+                    arrayElements[j].style.height = `${animations[i].merge[1][k++]/10}px`;
+                    await new Promise(r => setTimeout(r, 10));
+                }
+            }
+        }
+
+        sortedArray.sort(function(a, b){return a-b});
+        this.setState({array: sortedArray});
+    }
+
     componentDidMount(){
         this.shuffle();
     }
@@ -128,7 +163,7 @@ export class SortingVisualizer extends React.Component{
                 </div>
                 <div id="button">
                     <input type="range" min="5" max="200" id="range" onChange={this.shuffle} />
-                    <Buttons onHandleShuffle={this.shuffle} cSort={this.cSort} qSort={this.qSort} bSort={this.bSort} /*iSort={this.iSort}*//>
+                    <Buttons onHandleShuffle={this.shuffle} cSort={this.cSort} qSort={this.qSort} bSort={this.bSort} mSort={this.mSort} /*iSort={this.iSort}*//>
                 </div>
             </>
         );

@@ -16,6 +16,7 @@ export class Buttons extends React.Component{
                 <button onClick={this.props.cSort} style={styles}>Counting Sort</button>
                 <button onClick={this.props.qSort} style={styles}>Quick Sort</button>
                 <button onClick={this.props.bSort} style={styles}>Bubble Sort</button>
+                <button onClick={this.props.mSort} style={styles}>Merge Sort</button>
             </>
         );
     }

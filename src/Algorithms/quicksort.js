@@ -11,7 +11,6 @@ export const quicksort = (animations, array, st, dr) => {   //st = left, dr = ri
     }
     return array;
 }
-//this algorithm actually works, but I guess the animations are fucked
 
 const swap = (array, i, j) => {
     let temp = array[i];
