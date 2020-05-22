@@ -162,7 +162,7 @@ export class SortingVisualizer extends React.Component{
                     }
                 </div>
                 <div id="button">
-                    <input type="range" min="5" max="200" id="range" onChange={this.shuffle} />
+                    <input type="range" min="5" max="500" id="range" onChange={this.shuffle} />
                     <Buttons onHandleShuffle={this.shuffle} cSort={this.cSort} qSort={this.qSort} bSort={this.bSort} mSort={this.mSort} /*iSort={this.iSort}*//>
                 </div>
             </>

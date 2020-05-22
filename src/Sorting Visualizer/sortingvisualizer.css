@@ -1,5 +1,6 @@
 .numbers{
-    margin: 2px;
+    margin: 1px;
+    padding: 0px;
     width: 15px;
     background-color: aquamarine;
 }
