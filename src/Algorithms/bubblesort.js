@@ -1,6 +1,6 @@
 export const bubblesort = (animations = [], array) => {
     let sw = false;
-    do{
+    do {
         sw = true;
         for(let i = 0; i < array.length; i++){
             animations.push({compare: i});
@@ -10,7 +10,7 @@ export const bubblesort = (animations = [], array) => {
                 sw = false;
             }
         }
-    }while(!sw);
+    } while(!sw);
 
     return array;
 }

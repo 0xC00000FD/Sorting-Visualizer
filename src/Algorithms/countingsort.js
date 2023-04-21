@@ -22,5 +22,6 @@ export const countingSort = (arr) => {
             count[i]--;
         }
     }
+    
     return sortedArr;
 } 
